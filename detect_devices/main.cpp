@@ -27,14 +27,14 @@ int main () {
     cl::Platform::get(&platforms);
 
     // Get available devices for each platform
-    for (auto platform = platforms.begin(); platform != platforms.end(); platform++) {
-        std::cout << " - " << (*platform).getInfo<CL_PLATFORM_NAME>() << std::endl;
+    for (auto platform : platforms) {
+        std::cout << " - " << platform.getInfo<CL_PLATFORM_NAME>() << std::endl;
 
         std::vector<cl::Device> devices;
-        (*platform).getDevices(CL_DEVICE_TYPE_ALL, &devices);
+        platform.getDevices(CL_DEVICE_TYPE_ALL, &devices);
 
-        for (auto device = devices.begin(); device != devices.end(); device++) {
-            std::cout << "     > " << (*device).getInfo<CL_DEVICE_NAME>() << std::endl;
+        for (auto device : devices) {
+            std::cout << "     > " << device.getInfo<CL_DEVICE_NAME>() << std::endl;
         }
     }
 };
